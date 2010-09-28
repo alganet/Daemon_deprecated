@@ -1,0 +1,31 @@
+h2. About
+
+Respect\Daemon is PHP component to create and manage deamons using OS specific 
+tools. 
+
+h3. Sample Usage (not working yet)
+
+<pre>
+use Respect\Daemon;
+use Respect\Deamon\Manager as d; 
+$d = d::getInstance();
+$d->all(); //list all jobs
+$mongodb = $d->get("mongodb"); //get single job
+$d->start($mongodb);
+$d->status($mongodb);
+$d->stop($mongodb);
+$d->remove($mongodb); //remove from operating system
+$myd = new Deamon\Job("myd");
+$myd->setMain('/usr/bin/my/path');
+$d->save($myd); //save job to operating system
+$d->start($myd);
+</pre>
+
+h3. Linux
+
+Manages upstart (http://upstart.ubuntu.com) scripts and cron jobs.
+
+h3. Windows
+
+Manager windows services using the Windows Service Management API (through the
+win32service PECL extension).
