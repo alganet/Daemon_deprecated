@@ -30,7 +30,7 @@ class Manager
             $runs = call_user_func(
                 array(
                     '\Respect\Daemon\Adapters\\' . $adapterName,
-                    'runsOnCurrentEnvironment'
+                    'runsOnEnvironment'
                 )
             );
             if ($runs)

@@ -5,71 +5,33 @@ namespace Respect\Daemon;
 class Job
 {
 
-    protected $name;
-    protected $description;
-    protected $main;
-    protected $preStart;
-    protected $postStop;
+    protected $meta = array();
     protected $eventListeners = array();
+    protected $triggers = array();
 
     public function __construct($name)
     {
-        
+        $this->name = $name;
     }
 
-    public function getName()
+    public function addTrigger(Trigger $trigger)
     {
-        return $this->name;
+        $this->triggers[spl_object_hash($trigger)] = $trigger;
     }
 
-    public function getDescription()
+    public function removeTrigger(Trigger $trigger)
     {
-        return $this->description;
+        unset($this->triggers[spl_object_hash($trigger)]);
     }
 
-    public function getMain()
+    public function addMeta(Meta $meta)
     {
-        return $this->main;
+        $this->meta[spl_object_hash($meta)] = $meta;
     }
 
-    public function getPreStart()
-    {
-        return $this->preStart;
-    }
-
-    public function getPostStop()
-    {
-        return $this->postStop;
-    }
-
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    public function setMain(Runnable $main)
-    {
-        $this->main = $main;
-    }
-
-    public function setPreStart(Script $preStart)
-    {
-        $this->preStart = $preStart;
-    }
-
-    public function setPostStop(Script $postStop)
-    {
-        $this->postStop = $postStop;
-    }
-
-    public function addEventListener(Event $event)
+    public function addEventListener(EventListener $event)
     {
         $this->eventListeners[spl_object_hash($event)] = $event;
-    }
-
-    public function removeEventListener(Event $event)
-    {
-        unset($this->eventListeners[spl_object_hash($event)]);
     }
 
 }

@@ -2,11 +2,16 @@
 
 namespace Respect\Daemon;
 
-class EventListener extends Meta
+class Meta
 {
 
     protected $name;
     protected $value;
+    
+    public function __construct($name, $value) {
+        $this->name = $name;
+        $this->value = $value;
+    }
 
     public function getName()
     {

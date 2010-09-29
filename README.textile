@@ -1,7 +1,6 @@
 h2. About
 
-Respect\Daemon is PHP component to create and manage deamons using OS specific 
-tools. 
+Respect\Daemon is PHP component to create and manage deamons using OS specific tools. 
 
 h3. Sample Usage (not working yet)
 
@@ -27,5 +26,4 @@ Manages upstart (http://upstart.ubuntu.com) scripts and cron jobs.
 
 h3. Windows
 
-Manager windows services using the Windows Service Management API (through the
-win32service PECL extension).
+Manager windows services using the Windows Service Management API (through the win32service PECL extension).
