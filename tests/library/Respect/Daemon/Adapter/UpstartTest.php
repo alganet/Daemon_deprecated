@@ -2,6 +2,8 @@
 
 namespace Respect\Daemon\Adapters;
 
+use Respect\Daemon;
+
 class UpstartTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -14,28 +16,12 @@ class UpstartTest extends \PHPUnit_Framework_TestCase
 
     public function testFoo()
     {
-        $job = $this->object->getJobFromDefinition("acpid",
-                '# acpid - ACPI daemon
-#
-# The ACPI daemon provides a socket for other daemons to multiplex kernel
-# ACPI events from, and a framework for reacting to those events.
-
-description	"ACPI daemon"
-
-start on runlevel [2345]
-stop on runlevel [!2345]
-
-expect fork
-respawn
-
-exec acpid -c /etc/acpi/events -s /var/run/acpid.socket');
-    }
-
-    public function testBar()
-    {
-        $all = $this->object->all();
-        foreach ($all as &$a) $a = $this->object->get($a); 
-        print_r($all);
+        $job = new Daemon\Job("test");
+        $job->addTrigger(new Daemon\Trigger("main", new Daemon\Script("echo 1")));
+        echo $this->object->getDefinition($job);
+        $job = new Daemon\Job("test");
+        $job->addTrigger(new Daemon\Trigger("main", new Daemon\Executable("php")));
+        echo $this->object->getDefinition($job);
     }
 
 }

@@ -2,7 +2,7 @@
 
 namespace Respect\Daemon;
 
-class Script
+class Script implements Runnable
 {
 
     protected $body;
@@ -10,6 +10,11 @@ class Script
     public function __construct($body)
     {
         $this->body = $body;
+    }
+
+    public function getBody()
+    {
+        return $this->body;
     }
 
 }

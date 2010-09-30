@@ -5,6 +5,7 @@ namespace Respect\Daemon;
 class Job
 {
 
+    protected $name;
     protected $meta = array();
     protected $eventListeners = array();
     protected $triggers = array();
@@ -12,6 +13,26 @@ class Job
     public function __construct($name)
     {
         $this->name = $name;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
+    public function getEventListeners()
+    {
+        return $this->eventListeners;
+    }
+
+    public function getTriggers()
+    {
+        return $this->triggers;
     }
 
     public function addTrigger(Trigger $trigger)
