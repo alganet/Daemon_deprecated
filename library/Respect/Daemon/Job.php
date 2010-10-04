@@ -6,53 +6,37 @@ class Job
 {
 
     protected $name;
-    protected $meta = array();
-    protected $eventListeners = array();
-    protected $triggers = array();
-
-    public function __construct($name)
-    {
-        $this->name = $name;
-    }
+    protected $path;
+    protected $description;
 
     public function getName()
     {
         return $this->name;
     }
 
-    public function getMeta()
+    public function setName($name)
     {
-        return $this->meta;
+        $this->name = $name;
     }
 
-    public function getEventListeners()
+    public function getPath()
     {
-        return $this->eventListeners;
+        return $this->path;
     }
 
-    public function getTriggers()
+    public function setPath($path)
     {
-        return $this->triggers;
+        $this->path = $path;
     }
 
-    public function addTrigger(Trigger $trigger)
+    public function getDescription()
     {
-        $this->triggers[spl_object_hash($trigger)] = $trigger;
+        return $this->description;
     }
 
-    public function removeTrigger(Trigger $trigger)
+    public function setDescription($description)
     {
-        unset($this->triggers[spl_object_hash($trigger)]);
-    }
-
-    public function addMeta(Meta $meta)
-    {
-        $this->meta[spl_object_hash($meta)] = $meta;
-    }
-
-    public function addEventListener(EventListener $event)
-    {
-        $this->eventListeners[spl_object_hash($event)] = $event;
+        $this->description = $description;
     }
 
 }
