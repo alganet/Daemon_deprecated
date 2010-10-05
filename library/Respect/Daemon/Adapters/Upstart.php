@@ -10,9 +10,6 @@ use Respect\Daemon\Exceptions\PermissionException;
 use Respect\Daemon\Exceptions\InvalidAdapterException;
 use Respect\Env\Wrapper;
 
-//Overrides native PHP functions in this namespace, just on test conditions
-Wrapper::evil(__NAMESPACE__);
-
 class Upstart implements AdapterInterface
 {
 
@@ -28,6 +25,8 @@ class Upstart implements AdapterInterface
 
     public static function runsOnEnvironment()
     {
+        if (class_exists('Respect\Env\Wrapper', false))
+            Wrapper::evil(__NAMESPACE__);
         $uname = php_uname();
         if (false === stripos($uname, 'linux'))
             return false;
