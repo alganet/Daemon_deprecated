@@ -7,6 +7,10 @@ use Respect\Daemon\Job;
 use Respect\Daemon\Exceptions\JobAlreadyExistentException;
 use Respect\Daemon\Exceptions\InvalidJobException;
 use Respect\Daemon\Exceptions\PermissionException;
+use Respect\Daemon\Exceptions\InvalidAdapterException;
+use Respect\Env\Wrapper;
+
+Wrapper::evil(__NAMESPACE__);
 
 class Upstart implements AdapterInterface
 {
@@ -15,7 +19,19 @@ class Upstart implements AdapterInterface
 
     public function __construct($configDir='/etc/init')
     {
+        if (!static::runsOnEnvironment())
+            throw new InvalidAdapterException(
+                'Upstart isnt present on this system'
+            );
         $this->setConfigDir($configDir);
+    }
+
+    public static function runsOnEnvironment()
+    {
+        $uname = php_uname();
+        if (false === stripos($uname, 'linux'))
+            return false;
+        return false !== stripos(shell_exe('initctl --version'), 'upstart');
     }
 
     public function getConfigDir()
@@ -25,7 +41,7 @@ class Upstart implements AdapterInterface
 
     public function setConfigDir($configDir)
     {
-        if (false && !is_writable($configDir))
+        if (!is_writable($configDir))
             throw new PermissionException(
                 sprintf(
                     'current user does not have permission to write to "%s"',
