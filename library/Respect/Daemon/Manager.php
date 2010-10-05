@@ -3,6 +3,7 @@
 namespace Respect\Daemon;
 
 use DirectoryIterator;
+use Respect\Daemon\Job;
 
 class Manager
 {
@@ -30,6 +31,23 @@ class Manager
                 }
             }
         }
+    }
+
+    public static function register($name, $path)
+    {
+        $adapter = self::getAdapter();
+        if ($adapter->isJobRespectMade($name))
+            return true;
+        elseif ($adaopter->jobExists($name))
+            throw new Exceptions\InvalidJobException(
+                sprintf('Job %s exists but isnt manageable by Respect', $name)
+            );
+        $job = new Job();
+        $job->setName($name);
+        $job->setPath($path);
+        $job->setDescription('Auto-registered job ' . $name);
+        $adapter->register($job);
+        return true;
     }
 
 }

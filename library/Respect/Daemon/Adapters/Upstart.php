@@ -15,12 +15,13 @@ class Upstart implements AdapterInterface
 
     protected $configDir;
 
-    public function __construct()
+    public function __construct($configDir='/etc/init')
     {
         if (!static::runsOnEnvironment())
             throw new InvalidAdapterException(
                 'Upstart isnt present on this system'
             );
+        $this->setConfigDir($configDir);
     }
 
     public static function runsOnEnvironment()
@@ -40,18 +41,23 @@ class Upstart implements AdapterInterface
 
     public function setConfigDir($configDir)
     {
-        if (!is_writable($configDir))
+        $this->configDir = $configDir;
+    }
+
+    protected function checkPermissions()
+    {
+        if (!is_writable($this->configDir))
             throw new PermissionException(
                 sprintf(
-                    'current user does not have permission to write to "%s"',
+                    'Current user does not have permission to write to "%s". You probably need to run this as root.',
                     $configDir
                 )
             );
-        $this->configDir = $configDir;
     }
 
     public function register(Job $job)
     {
+        $this->checkPermissions();
         $jobName = $job->getName();
         $jobDescription = $job->getDescription();
         $jobPath = $job->getPath();
@@ -91,7 +97,7 @@ class Upstart implements AdapterInterface
     {
         $definitionPath = realpath($this->configDir)
             . DIRECTORY_SEPARATOR . $jobName . '.conf';
-        if (!file_exists($definitionPath))
+        if (!$this->jobExists($jobName))
             return false;
         $definition = file_get_contents($definitionPath);
         preg_match('/^\s*#resid\s+([0-9a-f]{32})\s*$/m', $definition,
@@ -103,6 +109,13 @@ class Upstart implements AdapterInterface
         $jobPath = $execMatch[1];
         $jobName = pathinfo($definitionPath, PATHINFO_FILENAME);
         return $this->getResid($jobName, $jobPath) === $resid;
+    }
+
+    public function jobExists($jobName)
+    {
+        $definitionPath = realpath($this->configDir)
+            . DIRECTORY_SEPARATOR . $jobName . '.conf';
+        return file_exists($definitionPath);
     }
 
     protected function getResid($jobName, $jobPath)

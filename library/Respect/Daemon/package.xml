@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Daemon</name>
+ <uri>http://github.com/Respect/Daemon</uri>
+ <summary>Daemon Manager</summary>
+ <description>Daemon Manager</description>
+ <lead>
+  <name>Alexandre Gaigalas</name>
+  <user>alganet</user>
+  <email>alexandre@gaigalas.net</email>
+  <active>yes</active>
+ </lead>
+ <date>2010-10-05</date>
+ <time>11:06:10</time>
+ <version>
+  <release>0.1.0</release>
+  <api>0.1.0</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
+ <notes>
+First Version
+ </notes>
+ <contents>
+  <dir baseinstalldir="Respect/Daemon" name="/">
+   <file baseinstalldir="Respect/Daemon" md5sum="a727e2935f2d15ee1c7d11e75a94b102" name="Adapters/Upstart.php" role="php" />
+   <file baseinstalldir="Respect/Daemon" md5sum="7caa07b1655ddb154010c527a4325317" name="Exceptions/InvalidAdapterException.php" role="php" />
+   <file baseinstalldir="Respect/Daemon" md5sum="e7ff48267aa989380e0397e9e0919e6e" name="Exceptions/InvalidJobException.php" role="php" />
+   <file baseinstalldir="Respect/Daemon" md5sum="80c60f3a94903fec807e40bc5422474c" name="Exceptions/JobAlreadyExistentException.php" role="php" />
+   <file baseinstalldir="Respect/Daemon" md5sum="1a637e9d99f5d8a1a9af6d624464526a" name="Exceptions/PermissionException.php" role="php" />
+   <file baseinstalldir="Respect/Daemon" md5sum="e3a542ffe762581e64bc637e04683a0d" name="AdapterInterface.php" role="php" />
+   <file baseinstalldir="Respect/Daemon" md5sum="3bb6b875244978e7bc3e6ab126fb9bc4" name="Job.php" role="php" />
+   <file baseinstalldir="Respect/Daemon" md5sum="111de61d47246e671fb2d8a364ba3f36" name="Manager.php" role="php" />
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.3</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>0.1.0</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2010-10-05</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
+   <notes>
+First Version
+   </notes>
+  </release>
+ </changelog>
+</package>
