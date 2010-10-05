@@ -5,6 +5,7 @@ namespace Respect\Daemon\Adapters;
 use Respect\Daemon\Job;
 use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
+use Respect\Env\Wrapper;
 
 class UpstartTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,11 +16,13 @@ class UpstartTest extends \PHPUnit_Framework_TestCase
     {
         $configDir = sys_get_temp_dir() . '/RespectEnvUnitTesting';
         @mkdir($configDir);
-        $this->object = new Upstart($configDir);
+        $this->object = new Upstart();
+        $this->object->setConfigDir($configDir);
     }
 
     protected function tearDown()
     {
+        Wrapper::set("raw");
         $dir = new RecursiveIteratorIterator(
                 new RecursiveDirectoryIterator(
                     $this->object->getConfigDir()
@@ -34,6 +37,40 @@ class UpstartTest extends \PHPUnit_Framework_TestCase
             }
         }
         rmdir($this->object->getConfigDir());
+    }
+
+    public function testGetInstance()
+    {
+        Wrapper::set("custom");
+        Wrapper::getCurrent()->setShellCallback(
+            function() {
+                return 'upstart';
+            }
+        );
+        $r = \Respect\Daemon\Manager::getAdapter();
+        $this->assertType('Respect\Daemon\Adapters\Upstart', $r);
+    }
+
+    public function testRunsOnEnvironment()
+    {
+        Wrapper::set("custom");
+        Wrapper::getCurrent()->setShellCallback(
+            function() {
+                return 'upstart';
+            }
+        );
+        $this->assertTrue(Upstart::runsOnEnvironment());
+    }
+
+    public function testRunsOnEnvironmentFalse()
+    {
+        Wrapper::set("custom");
+        Wrapper::getCurrent()->setShellCallback(
+            function() {
+                return 'command not found';
+            }
+        );
+        $this->assertFalse(Upstart::runsOnEnvironment());
     }
 
     public function testRegister()

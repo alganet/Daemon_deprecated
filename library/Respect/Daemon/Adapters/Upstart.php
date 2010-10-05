@@ -10,6 +10,7 @@ use Respect\Daemon\Exceptions\PermissionException;
 use Respect\Daemon\Exceptions\InvalidAdapterException;
 use Respect\Env\Wrapper;
 
+//Overrides native PHP functions in this namespace, just on test conditions
 Wrapper::evil(__NAMESPACE__);
 
 class Upstart implements AdapterInterface
@@ -17,13 +18,12 @@ class Upstart implements AdapterInterface
 
     protected $configDir;
 
-    public function __construct($configDir='/etc/init')
+    public function __construct()
     {
         if (!static::runsOnEnvironment())
             throw new InvalidAdapterException(
                 'Upstart isnt present on this system'
             );
-        $this->setConfigDir($configDir);
     }
 
     public static function runsOnEnvironment()
@@ -31,7 +31,7 @@ class Upstart implements AdapterInterface
         $uname = php_uname();
         if (false === stripos($uname, 'linux'))
             return false;
-        return false !== stripos(shell_exe('initctl --version'), 'upstart');
+        return false !== stripos(shell_exec('initctl --version'), 'upstart');
     }
 
     public function getConfigDir()
