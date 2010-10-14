@@ -12,4 +12,8 @@ interface AdapterInterface
     public function isJobRespectMade($jobName);
 
     public function jobExists($jobName);
+
+    public function identify($jobName, $pid);
+
+    public function log($jobname, $message, $priority=5);
 }

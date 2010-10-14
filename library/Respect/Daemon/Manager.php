@@ -4,6 +4,8 @@ namespace Respect\Daemon;
 
 use DirectoryIterator;
 use Respect\Daemon\Job;
+use Respect\Daemon\Exceptions\InvalidEnvironmentException;
+use Respect\Env\Wrapper;
 
 class Manager
 {
@@ -31,14 +33,26 @@ class Manager
                 }
             }
         }
+        throw new InvalidEnvironmentException(
+            "Current environment is not supported by any of the adapters"
+        );
     }
 
-    public static function register($name, $path)
+    public static function register($name=null)
     {
+        if (class_exists('Respect\Env\Wrapper', false))
+            Wrapper::evil(__NAMESPACE__);
+        $path = realpath(getenv('SCRIPT_NAME'));
+        if (empty($path))
+            throw new InvalidEnvironmentException(
+                "Current environment does not provide a script filename"
+            );
+        if (is_null($name))
+            $name = pathinfo($path, PATHINFO_FILENAME);
         $adapter = self::getAdapter();
         if ($adapter->isJobRespectMade($name))
             return true;
-        elseif ($adaopter->jobExists($name))
+        elseif ($adapter->jobExists($name))
             throw new Exceptions\InvalidJobException(
                 sprintf('Job %s exists but isnt manageable by Respect', $name)
             );
