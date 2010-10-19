@@ -10,8 +10,8 @@
   <email>alexandre@gaigalas.net</email>
   <active>yes</active>
  </lead>
- <date>2010-10-13</date>
- <time>22:10:55</time>
+ <date>2010-10-19</date>
+ <time>15:35:46</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -26,7 +26,7 @@ First Version
  </notes>
  <contents>
   <dir baseinstalldir="Respect/Daemon" name="/">
-   <file baseinstalldir="Respect/Daemon" md5sum="4afd0beeb96cee156c9f8fcc0db7c3ce" name="Adapters/Upstart.php" role="php" />
+   <file baseinstalldir="Respect/Daemon" md5sum="1b9d2eccd51969886ea8f59d401f4336" name="Adapters/Upstart.php" role="php" />
    <file baseinstalldir="Respect/Daemon" md5sum="7caa07b1655ddb154010c527a4325317" name="Exceptions/InvalidAdapterException.php" role="php" />
    <file baseinstalldir="Respect/Daemon" md5sum="aaa33aff15d82ac357ce7a0534c3b32d" name="Exceptions/InvalidEnvironmentException.php" role="php" />
    <file baseinstalldir="Respect/Daemon" md5sum="e7ff48267aa989380e0397e9e0919e6e" name="Exceptions/InvalidJobException.php" role="php" />
@@ -34,7 +34,7 @@ First Version
    <file baseinstalldir="Respect/Daemon" md5sum="1a637e9d99f5d8a1a9af6d624464526a" name="Exceptions/PermissionException.php" role="php" />
    <file baseinstalldir="Respect/Daemon" md5sum="0241e2a64eddfeed7b9d7d3a28c2621f" name="AdapterInterface.php" role="php" />
    <file baseinstalldir="Respect/Daemon" md5sum="3bb6b875244978e7bc3e6ab126fb9bc4" name="Job.php" role="php" />
-   <file baseinstalldir="Respect/Daemon" md5sum="8120a537d7965524b23c608401db65dc" name="Manager.php" role="php" />
+   <file baseinstalldir="Respect/Daemon" md5sum="5bd8a3048c379d27027f85fbcbf0e184" name="Manager.php" role="php" />
   </dir>
  </contents>
  <dependencies>
@@ -58,7 +58,7 @@ First Version
     <release>alpha</release>
     <api>alpha</api>
    </stability>
-   <date>2010-10-13</date>
+   <date>2010-10-19</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
    <notes>
 First Version

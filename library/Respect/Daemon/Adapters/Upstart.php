@@ -26,8 +26,6 @@ class Upstart implements AdapterInterface
 
     public static function runsOnEnvironment()
     {
-        if (class_exists('Respect\Env\Wrapper', false))
-            Wrapper::evil(__NAMESPACE__);
         $uname = php_uname();
         if (false === stripos($uname, 'linux'))
             return false;

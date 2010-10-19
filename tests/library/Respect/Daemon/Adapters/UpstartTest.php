@@ -14,6 +14,8 @@ class UpstartTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
+        Wrapper::evil('Respect\Daemon');
+        Wrapper::evil('Respect\Daemon\Adapters');
         Wrapper::set("custom");
         Wrapper::getCurrent()->setShellCallback(
             function() {

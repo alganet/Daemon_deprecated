@@ -40,8 +40,6 @@ class Manager
 
     public static function register($name=null)
     {
-        if (class_exists('Respect\Env\Wrapper', false))
-            Wrapper::evil(__NAMESPACE__);
         $path = realpath(getenv('SCRIPT_NAME'));
         if (empty($path))
             throw new InvalidEnvironmentException(
