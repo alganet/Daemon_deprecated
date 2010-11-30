@@ -85,6 +85,7 @@ class Upstart implements AdapterInterface
         $definition .= "#resid $resid \n";
         $definition .= "description \"$jobDescription\" \n";
         $definition .= "expect daemon \n";
+        $definition .= "respawn \n";
         $definition .= "start on runlevel [2345] \n";
         $definition .= "stop on runlevel [!2345] \n";
         $definition .= "exec $jobPath \n";

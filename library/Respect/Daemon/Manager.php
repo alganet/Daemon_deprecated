@@ -5,7 +5,7 @@ namespace Respect\Daemon;
 use DirectoryIterator;
 use Respect\Daemon\Job;
 use Respect\Daemon\Exceptions\InvalidEnvironmentException;
-use Respect\Env\Wrapper;
+;
 
 class Manager
 {
